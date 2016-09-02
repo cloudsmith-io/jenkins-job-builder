@@ -6437,6 +6437,63 @@ def github_pull_request_merge(registry, xml_parent, data):
     helpers.convert_mapping_to_xml(osb, data, mapping, fail_required=True)
 
 
+def tasks(registry, xml_parent, data):
+    """yaml: tasks
+    Example:
+    """
+
+    root = XML.SubElement(
+        xml_parent, 'hudson.plugins.tasks.TasksPublisher')
+
+    root_mapping = [
+        # option, xml name, default value
+        ('default-encoding', 'defaultEncoding', ''),
+        ('should-detect-modules', 'shouldDetectModules', 'false'),
+        ('pattern', 'pattern', ''),
+        ('exclude-pattern', 'excludePattern', 'false'),
+        ('healthy', 'healthy', ''),
+        ('un-healthy', 'unHealthy', ''),
+        ('threshold-limit', 'thresholdLimit', 'low'),
+        ('use-delta-values', 'useDeltaValues', 'false'),
+        ('high', 'high', ''),
+        ('normal', 'normal', ''),
+        ('low', 'low', ''),
+        ('ignore-case', 'ignoreCase', 'false'),
+        ('as-regexp', 'asRegexp', 'false'),
+        ('can-run-on-failed', 'canRunOnFailed', 'false'),
+        ('use-previous-build-as-reference',
+            'usePreviousBuildAsReference', 'false'),
+        ('use-stable-build-as-reference',
+            'useStableBuildAsReference', 'false'),
+        ('can-compute-new', 'canComputeNew', 'true'),
+    ]
+    helpers.convert_mapping_to_xml(
+        root_mapping, data, root_mapping, fail_required=True)
+
+    thresholds = XML.SubElement(root, 'thresholds')
+    thresholds_mapping = [
+        ('unstable-total-all', 'unstableTotalAll', ''),
+        ('unstable-total-high', 'unstableTotalHigh', ''),
+        ('unstable-total-normal', 'unstableTotalNormal', ''),
+        ('unstable-total-low', 'unstableTotalLow', ''),
+        ('unstable-new-all', 'unstableNewAll', ''),
+        ('unstable-new-high', 'unstableNewHigh', ''),
+        ('unstable-new-normal', 'unstableNewNormal', ''),
+        ('unstable-new-low', 'unstableNewLow', ''),
+        ('failed-total-all', 'failedTotalAll', ''),
+        ('failed-total-high', 'failedTotalHigh', ''),
+        ('failed-total-normal', 'failedTotalNormal', ''),
+        ('failed-total-low', 'failedTotalLow', ''),
+        ('failed-new-all', 'failedNewAll', ''),
+        ('failed-new-high', 'failedNewHigh', ''),
+        ('failed-new-normal', 'failedNewNormal', ''),
+        ('failed-new-low', 'failedNewLow', ''),
+    ]
+
+    helpers.convert_mapping_to_xml(
+        thresholds, data, thresholds_mapping, fail_required=True)
+
+
 class Publishers(jenkins_jobs.modules.base.Base):
     sequence = 70
 
