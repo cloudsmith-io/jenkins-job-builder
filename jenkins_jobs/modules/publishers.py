@@ -6444,7 +6444,6 @@ def tasks(registry, xml_parent, data):
 
     root = XML.SubElement(
         xml_parent, 'hudson.plugins.tasks.TasksPublisher')
-
     root_mapping = [
         # option, xml name, default value
         ('default-encoding', 'defaultEncoding', ''),
@@ -6462,13 +6461,14 @@ def tasks(registry, xml_parent, data):
         ('as-regexp', 'asRegexp', 'false'),
         ('can-run-on-failed', 'canRunOnFailed', 'false'),
         ('use-previous-build-as-reference',
-            'usePreviousBuildAsReference', 'false'),
+         'usePreviousBuildAsReference', 'false'),
         ('use-stable-build-as-reference',
-            'useStableBuildAsReference', 'false'),
+         'useStableBuildAsReference', 'false'),
         ('can-compute-new', 'canComputeNew', 'true'),
     ]
+
     helpers.convert_mapping_to_xml(
-        root_mapping, data, root_mapping, fail_required=True)
+        root, data, root_mapping, fail_required=True)
 
     thresholds = XML.SubElement(root, 'thresholds')
     thresholds_mapping = [
